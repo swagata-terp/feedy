@@ -1,0 +1,51 @@
+Why 2 servers?
+We have one server in the client side and another
+server from express
+
+The express server generates works with the database
+and generates json
+
+The react server will take react components and 
+bundle them together into a bundle.js file that 
+
+Why cant we just do 1 server with both?
+
+We can actually. Would not be hard but create-react-app
+has so much stuff that it handles out of the box
+that it is worth the time figuring out another
+server
+
+64 Server Architecture
+Lot of stuff thats happening
+
+Why do we have 1 server?
+Why not have a emaily.com and a emaily-api.com?
+
+We could have gone in that direction, but decided to go the easier route
+and have 1 pipeline with 2 servers instead of 2 servers individually.
+ As in the brw
+
+Issue #1 : security
+if emaily-api tries to make a request to eemaily a different port
+the browser will not include cookies with that request by default
+we dont need to worry about headers and json tokens
+
+Issue #2 nearly identical to 1, if we attempt to make a ajax request to a
+different domain, it is called a CORS request. Cross Origin Resource Sharing
+brower assumes this is malicious. Entirely a security Issue
+We can go around it so that it can handle CORS request
+
+Issue #3 what is the flow?
+
+Dev mode
+    1)in the browser, sees a link
+    2) browswer sees it is a relative route, and just append it to the url
+    3) Going to the server and to the proxu
+    4) proxy will look at package json and see if the path is listed
+    5) tells browser to sit and the proxy copies the request and sends it to
+    6) new route
+    7)
+
+What is webpack?
+it is a module loader takes a big ol pile of js files
+ and condenses it down

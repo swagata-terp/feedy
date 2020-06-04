@@ -31,31 +31,31 @@ passport.use(
         callbackURL: '/auth/google/callback',
         proxy: true
     }, 
-    (acessToken, refreshToken, profile, done) => {
+    async (acessToken, refreshToken, profile, done) => {
 
-        User.findOne({ googleId: profile.id})
-            .then((existingUser) => {
-                if(existingUser) {
-                    //we already have a record with the given profile ID
-                    //callbacks take a done function that tells the promise
-                    //was complete. Now done takes two parameters
-                    //an error message, which is null in this case and the 
-                    //returning data
-                    done(null, existingUser);
-                } else {
-                    //we dont have a user record with this ID, make new record
-                    // this creates a new mongo instance of the User model
-                    new User({ googleId: profile.id })
-                    .save()
-                    //this user provided from the callback
-                    // is another instance that is the same
-                    //as above but we use this one because there might have
-                    //been changes made to the top one while it was
-                    // being saved
-                    .then(user => done(null, user));
+        const existingUser = await User.findOne({ googleId: profile.id})
+            
+            
+            if(existingUser) {
+                //we already have a record with the given profile ID
+                //callbacks take a done function that tells the promise
+                //was complete. Now done takes two parameters
+                //an error message, which is null in this case and the 
+                //returning data
+                done(null, existingUser);
+            } else {
+                //we dont have a user record with this ID, make new record
+                // this creates a new mongo instance of the User model
+                const user = await new User({ googleId: profile.id }).save()
+                //this user provided from the callback
+                // is another instance that is the same
+                //as above but we use this one because there might have
+                //been changes made to the top one while it was
+                // being saved
+                done(null,user);
 
-                }
-            })
+            }
+            
 
     })
 );
