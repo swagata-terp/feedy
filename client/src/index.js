@@ -7,6 +7,8 @@ import { createStore, applyMiddleware} from 'redux'
 import reduxThunk from 'redux-thunk'
 import reducers from './reducers'
 import 'materialize-css/dist/css/materialize.min.css'
+import axios from 'axios'
+window.axios = axios
 
 // how redux works again
 // React Components calls a Action Creator -> returns Action that is sent
