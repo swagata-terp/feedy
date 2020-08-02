@@ -15,7 +15,7 @@ module.exports = app => {
     app.get('/api/surveys', requireLogin, async (req,res) => {
 
        const surveys =  await Survey.find({_user: req.user.id})
-       .select({ recipients: false});
+       .select({ recipients: false})
 
        res.send(surveys)
 
@@ -28,7 +28,6 @@ module.exports = app => {
         .map(({email, url }) => {
             const match = p.test(new URL(url).pathname);
             if(match) {
-                console.log(match)
                 return { email, surveyId: match.surveyId, choice: match.choice }
     
             }
