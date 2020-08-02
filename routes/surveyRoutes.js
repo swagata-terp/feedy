@@ -26,6 +26,9 @@ module.exports = app => {
 
      _.chain(req.body)
         .map(({email, url }) => {
+            if (!url) {
+                return res.status(400).json({ error: 'Some error message' });
+            }      
             const match = p.test(new URL(url).pathname);
             if(match) {
                 return { email, surveyId: match.surveyId, choice: match.choice }
