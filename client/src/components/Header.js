@@ -6,6 +6,8 @@ import Payments from './Payments'
 class Header extends Component {
 
     renderContent() {
+        console.log(" header logs" )
+        console.log( this.props.auth)
         switch (this.props.auth) {
             case null:
                 return;
